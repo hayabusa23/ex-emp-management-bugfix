@@ -83,7 +83,7 @@ public class AdministratorController {
 		// フォームからドメインにプロパティ値をコピー
 		BeanUtils.copyProperties(insertAdministratorForm, administrator);
 		administratorService.insert(administrator);
-		return "administrator/login";
+		return "redirect:/";
 	}
 
 	/////////////////////////////////////////////////////
