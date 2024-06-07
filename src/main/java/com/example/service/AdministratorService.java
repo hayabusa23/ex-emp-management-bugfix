@@ -25,12 +25,15 @@ public class AdministratorService {
      *
      * @param administrator 管理者情報
      */
-    public void insert(Administrator administrator, BindingResult bindingResult) {
-        if (administratorRepository.findByMailAddress(administrator.getMailAddress()) != null) {
-			bindingResult.rejectValue("mailAddress", "duplicate.administrator.mailAddress", "このメールアドレスは既に登録されています");
-		} else {
+    public void insert(Administrator administrator) {
 			administratorRepository.insert(administrator);
+    }
+
+    public boolean checkMail(Administrator administrator){
+        if (administratorRepository.findByMailAddress(administrator.getMailAddress()) != null) {
+            return false;
         }
+        return true;
     }
 
     /**
