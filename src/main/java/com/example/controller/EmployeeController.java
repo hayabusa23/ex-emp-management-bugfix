@@ -59,7 +59,6 @@ public class EmployeeController {
     @PostMapping("/search")
     public String search(SearchForm searchForm, Model model) {
         List<Employee> employeeList = employeeService.showSearchList(searchForm.getSearchName());
-		System.out.println(employeeList);
         if (employeeList.size() == 0) {
             employeeList = employeeService.showList();
             String notFindSearch = "1件もありませんでした。";
