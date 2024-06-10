@@ -38,7 +38,7 @@ public class EmployeeService {
 	}
 
 
-	public void insert(Employee employee){
+	public synchronized void insert(Employee employee){
 		int nextId = employeeRepository.findMaxId() + 1;
 		employee.setId(nextId);
 		employeeRepository.insert(employee);
