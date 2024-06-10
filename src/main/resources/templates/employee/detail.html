@@ -84,9 +84,7 @@
 
       <!-- パンくずリスト -->
       <ol class="breadcrumb">
-        <li>
-          <a href="list.html" th:href="@{/employee/showList}">従業員リスト</a>
-        </li>
+        <li>従業員リスト</li>
         <li class="active">従業員詳細</li>
       </ol>
 
@@ -134,10 +132,7 @@
                   <tr>
                     <th nowrap>入社日</th>
                     <td>
-                      <span
-                        th:utext="${#dates.format(employee.hireDate, 'yyyy年MM月dd日')}"
-                        >2012/11/29</span
-                      >
+                      <span th:text="${#dates.format(employee.hireDate, 'yyyy年MM月dd日')}">2012/11/29</span>
                     </td>
                   </tr>
                   <tr>
@@ -173,10 +168,7 @@
                   <tr>
                     <th nowrap>給料</th>
                     <td>
-                      <span
-                        th:utext="${#numbers.formatInteger(employee.salary,0,'COMMA')} + '円'"
-                        >400000円</span
-                      >
+                      <span th:text="${#numbers.formatInteger(employee.salary,0,'COMMA')} + '円'">400000円</span>
                     </td>
                   </tr>
                   <tr>

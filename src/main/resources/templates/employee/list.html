@@ -96,6 +96,18 @@
         >
           <!-- ここから上を編集する必要はありません -->
 
+
+          <div>
+            <form th:action="@{/employee/search}" method="post">
+              検索：
+              <input type="text" name="searchName">
+              <button>検索</button>
+            </form>
+          </div>
+          <span th:text="${notFindSearch}"></span>
+
+
+
           <!-- ここにモックのtable要素を貼り付けます -->
 
           <table class="table table-striped">
@@ -117,10 +129,7 @@
                   </a>
                 </td>
                 <td>
-                  <span
-                    th:text="${#dates.format(employee.hireDate, 'yyyy年MM月dd日')}"
-                    >2016/12/1</span
-                  >
+                  <span th:text="${#dates.format(employee.hireDate, 'yyyy年MM月dd日')}">2016/12/1</span>
                 </td>
                 <td>
                   <span th:text="${employee.dependentsCount} + '人'">3人</span>

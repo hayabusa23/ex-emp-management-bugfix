@@ -57,7 +57,10 @@
                   <div class="row">
                     <div class="col-sm-12">
                       <label for="name"> 氏名: </label>
-                      <label th:errors="*{name}" class="error-messages">
+                      <label
+                        th:errors="*{name}"
+                        class="error-messages"
+                      >
                         氏名を入力してください
                       </label>
                       <input
@@ -78,7 +81,10 @@
                   <div class="row">
                     <div class="col-sm-12">
                       <label for="mailAddress"> メールアドレス: </label>
-                      <label th:errors="*{mailAddress}" class="error-messages">
+                      <label
+                        th:errors="*{mailAddress}"
+                        class="error-messages"
+                      >
                         メールアドレスを入力してください
                       </label>
                       <input
@@ -99,7 +105,10 @@
                   <div class="row">
                     <div class="col-sm-12">
                       <label for="password"> パスワード: </label>
-                      <label th:errors="*{password}" class="error-messages">
+                      <label
+                        th:errors="*{password}"
+                        class="error-messages"
+                      >
                         パスワードを入力してください
                       </label>
                       <input
@@ -115,24 +124,6 @@
                     </div>
                   </div>
                 </div>
-
-                <!-- 確認用パスワード -->
-                <label for="confirm-password"> 確認パスワード: </label>
-                <span th:errors="*{confirmPassword}" class="error-messages"></span>
-                
-                <div th:text="${errorMessageConfirmPassword}"></div>
-                <input
-                  type="password"
-                  name="confirmPassword"
-                  id="confirm-password"
-                  class="form-control"
-                  placeholder="confirmPassword"
-                  th:field="*{confirmPassword}"
-                  th:errorclass="error-input"
-                  value="xxxxxxxx"
-                />
-                <br />
-
                 <!-- 登録ボタン -->
                 <div class="form-group">
                   <div class="row">
