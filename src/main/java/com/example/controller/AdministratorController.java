@@ -76,9 +76,14 @@ public class AdministratorController {
      */
     @PostMapping("/insert")
     public String insert(@Validated InsertAdministratorForm insertAdministratorForm, BindingResult bindingResult, Model model) {
+        if (!insertAdministratorForm.getConfirmPassword().equals(insertAdministratorForm.getPassword())) {
+            bindingResult.rejectValue("confirmPassword", "error.confirmPassword", "パスワードと一致していません。");
+        }
         if (bindingResult.hasErrors()) {
             return toInsert(insertAdministratorForm, model);
         }
+
+
         Administrator administrator = new Administrator();
         // フォームからドメインにプロパティ値をコピー
         BeanUtils.copyProperties(insertAdministratorForm, administrator);
@@ -113,7 +118,6 @@ public class AdministratorController {
             redirectAttributes.addFlashAttribute("errorMessage", "メールアドレスまたはパスワードが不正です。");
             return "redirect:/";
         }
-        session.setAttribute("administratorName", administrator.getName());
         return "redirect:/employee/showList";
     }
 
