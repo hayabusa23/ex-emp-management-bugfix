@@ -76,23 +76,20 @@ public class AdministratorController {
      */
     @PostMapping("/insert")
     public String insert(@Validated InsertAdministratorForm insertAdministratorForm, BindingResult bindingResult, Model model) {
+        Administrator administrator = new Administrator();
+        // フォームからドメインにプロパティ値をコピー
+        BeanUtils.copyProperties(insertAdministratorForm, administrator);
+
+
         if (bindingResult.hasErrors()) {
+            if (administratorService.checkMail(administrator) == false) {
+                model.addAttribute("mailAddressDoubleMessage", "このメールアドレスは既に登録されています");
+            }
             return toInsert(insertAdministratorForm, model);
         }
 
 
-        Administrator administrator = new Administrator();
-        // フォームからドメインにプロパティ値をコピー
-        BeanUtils.copyProperties(insertAdministratorForm, administrator);
-        if (administratorService.checkMail(administrator) == false){
-            model.addAttribute("mailAddressDoubleMessage", "このメールアドレスは既に登録されています");
-            return toInsert(insertAdministratorForm,model);
-        }
         administratorService.insert(administrator);
-
-
-
-
 
         return "redirect:/";
     }
