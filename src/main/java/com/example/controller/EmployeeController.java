@@ -1,8 +1,16 @@
 package com.example.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.time.ZoneId;
+import java.util.Base64;
+import java.util.Date;
 import java.util.List;
 
+
+import com.example.form.InsertEmployeeForm;
 import com.example.form.SearchForm;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -55,6 +63,47 @@ public class EmployeeController {
         model.addAttribute("employeeList", employeeList);
         return "employee/list";
     }
+
+    @GetMapping("/toInsert")
+    public String toInsert(InsertEmployeeForm insertEmployeeForm, Model model) {
+        return "employee/insert";
+    }
+
+
+    @PostMapping("/insert")
+    public String insert(@Validated InsertEmployeeForm insertEmployeeForm, BindingResult bindingResult, Model model) {
+        System.out.println(insertEmployeeForm);
+        if (insertEmployeeForm.getImage().isEmpty()) {
+            bindingResult.rejectValue("image", "", "画像の入力は必須です。");
+        }
+        if (bindingResult.hasErrors()) {
+            return toInsert(insertEmployeeForm, model);
+        }
+        Employee employee = new Employee();
+        BeanUtils.copyProperties(insertEmployeeForm, employee);
+
+
+        employee.setHireDate(java.util.Date.from(insertEmployeeForm.getHireDate().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+
+        try {
+            byte[] byteImg = insertEmployeeForm.getImage().getBytes();
+            String base64Data = Base64.getEncoder().encodeToString(byteImg);
+            System.out.println(insertEmployeeForm.getImage().getContentType());
+
+            if (insertEmployeeForm.getImage().getContentType().equals("image/png")) {
+                employee.setImage("data:image/png;base64," + base64Data);
+            } else if (insertEmployeeForm.getImage().getContentType().equals("image/jpeg")) {
+                employee.setImage("data:image/jpeg;base64," + base64Data);
+            }
+        } catch (IOException e) {
+            return null;
+        }
+
+
+        employeeService.insert(employee);
+        return "redirect:/employee/showList";
+    }
+
 
     @PostMapping("/search")
     public String search(SearchForm searchForm, Model model) {
