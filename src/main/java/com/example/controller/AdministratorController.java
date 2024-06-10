@@ -82,9 +82,14 @@ public class AdministratorController {
         if (administratorService.checkMail(administrator) == false) {
             bindingResult.rejectValue("mailAddress", "", "このメールアドレスは既に登録されています。");
         }
+        if (!insertAdministratorForm.getConfirmPassword().equals(insertAdministratorForm.getPassword())) {
+            bindingResult.rejectValue("confirmPassword", "error.confirmPassword", "パスワードと一致していません。");
+        }
+
         if (bindingResult.hasErrors()) {
             return toInsert(insertAdministratorForm, model);
         }
+
         administratorService.insert(administrator);
         return "redirect:/";
     }
@@ -92,6 +97,7 @@ public class AdministratorController {
     /////////////////////////////////////////////////////
     // ユースケース：ログインをする
     /////////////////////////////////////////////////////
+
 
     /**
      * ログイン画面を出力します.
