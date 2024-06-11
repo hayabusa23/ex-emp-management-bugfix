@@ -1,5 +1,6 @@
 package com.example.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,15 @@ public class EmployeeService {
 	public List<Employee> showSearchList(String searchName){
 		List<Employee> employeeList = employeeRepository.findByName(searchName);
 		return employeeList;
+	}
+
+	public List<String> getAllEmployeeNames(){
+		List<Employee> employeeList = employeeRepository.findAll();
+		List<String> employeeNameList = new ArrayList<>();
+		for (Employee employee : employeeList){
+			employeeNameList.add(employee.getName());
+		}
+		return employeeNameList;
 	}
 
 
