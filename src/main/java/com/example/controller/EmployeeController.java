@@ -62,19 +62,19 @@ public class EmployeeController {
     }
 
     @GetMapping("/toInsert")
-    public String toInsert(InsertEmployeeForm insertEmployeeForm, Model model) {
+    public String toInsert(InsertEmployeeForm insertEmployeeForm) {
         return "employee/insert";
     }
 
 
     @PostMapping("/insert")
-    public String insert(@Validated InsertEmployeeForm insertEmployeeForm, BindingResult bindingResult, Model model) {
+    public String insert(@Validated InsertEmployeeForm insertEmployeeForm, BindingResult bindingResult) {
         System.out.println(insertEmployeeForm);
         if (insertEmployeeForm.getImage().isEmpty()) {
             bindingResult.rejectValue("image", "", "画像の入力は必須です。");
         }
         if (bindingResult.hasErrors()) {
-            return toInsert(insertEmployeeForm, model);
+            return toInsert(insertEmployeeForm);
         }
         Employee employee = new Employee();
         BeanUtils.copyProperties(insertEmployeeForm, employee);
