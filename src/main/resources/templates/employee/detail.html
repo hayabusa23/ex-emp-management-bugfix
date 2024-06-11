@@ -117,10 +117,11 @@
                   <tr>
                     <th nowrap>写真</th>
                     <td>
-                      <img
+                      <!-- <img
                         src="../../static/img/e2.png"
                         th:src="${'/img/' + employee.image}"
-                      />
+                      /> -->
+                      <img th:src="${employee.image}">
                     </td>
                   </tr>
                   <tr>

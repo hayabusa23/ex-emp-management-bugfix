@@ -37,6 +37,13 @@ public class EmployeeService {
 		return employeeList;
 	}
 
+
+	public synchronized void insert(Employee employee){
+		int nextId = employeeRepository.findMaxId() + 1;
+		employee.setId(nextId);
+		employeeRepository.insert(employee);
+	}
+
 	/**
 	 * 従業員情報を取得します.
 	 * 

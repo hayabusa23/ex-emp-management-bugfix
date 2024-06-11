@@ -82,6 +82,19 @@ public class EmployeeRepository {
 		return development;
 	}
 
+	public int findMaxId(){
+		String sql = "SELECT MAX(id) FROM employees";
+		Integer maxId = template.queryForObject(sql, new MapSqlParameterSource(), Integer.class);
+		return maxId;
+	}
+
+	public void insert(Employee employee){
+		System.out.println(employee);
+		String sql = "INSERT INTO employees(id,name,image,gender,hire_date,mail_address,zip_code,address,telephone,salary,characteristics,dependents_count)VALUES(:id,:name,:image,:gender,:hireDate,:mailAddress,:zipCode,:address,:telephone,:salary,:characteristics,:dependentsCount);";
+		SqlParameterSource param = new BeanPropertySqlParameterSource(employee);
+		template.update(sql, param);
+	}
+
 	/**
 	 * 従業員情報を変更します.
 	 */

@@ -1,5 +1,7 @@
 package com.example.domain;
 
+import jakarta.validation.constraints.Pattern;
+
 import java.util.Date;
 
 /**
