@@ -1,6 +1,7 @@
 "use strict";
 
 $(function () {
+
   $.ajax({
     url: "http://localhost:8080/employee/getJsonForEmployeeNameList",
     type: "get",
@@ -9,9 +10,9 @@ $(function () {
   })
     .done(function (data) {
       // RestControllerではnameのリストをreturnするとJSON形式でdataに入る
-      console.dir(JSON.stringify(data));
+    //   console.dir(JSON.stringify(data));
 
-      $("#search").autocomplete({
+      $("#autoComplete").autocomplete({
         source: data,
       });
     })
