@@ -109,12 +109,16 @@
           <div>
             <form th:action="@{/employee/search}" method="post">
               検索：
-              <input type="text" name="searchName" id="autoComplete"/>
+              <input type="text" name="searchName" id="autoComplete" />
               <button>検索</button>
             </form>
           </div>
           <span th:text="${notFindSearch}"></span>
 
+          <br>
+          <div>
+            <a th:href="@{/employee/showList?pageLimit=}+${pageLimit}">つぎの10件を表示</a>
+          </div>
           <!-- ここにモックのtable要素を貼り付けます -->
 
           <table class="table table-striped">
@@ -156,15 +160,14 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
-    
-    
+
     <script
-    type="text/javascript"
-    src="http://code.jquery.com/jquery-1.10.2.min.js"
+      type="text/javascript"
+      src="http://code.jquery.com/jquery-1.10.2.min.js"
     ></script>
     <script
-    type="text/javascript"
-    src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"
+      type="text/javascript"
+      src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"
     ></script>
     <script th:src="@{/js/employeeAutoComplete.js}"></script>
   </body>
