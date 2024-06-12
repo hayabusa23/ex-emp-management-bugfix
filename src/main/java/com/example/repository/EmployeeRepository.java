@@ -51,9 +51,14 @@ public class EmployeeRepository {
 	 */
 	public List<Employee> findAll() {
 		String sql = "SELECT id,name,image,gender,hire_date,mail_address,zip_code,address,telephone,salary,characteristics,dependents_count FROM employees ORDER BY hire_date ASC";
-
 		List<Employee> developmentList = template.query(sql, EMPLOYEE_ROW_MAPPER);
 
+		return developmentList;
+	}
+	public List<Employee> findTenEmployees(Integer pageLimit) {
+		String sql = "SELECT id,name,image,gender,hire_date,mail_address,zip_code,address,telephone,salary,characteristics,dependents_count FROM employees ORDER BY hire_date ASC LIMIT 10 OFFSET :pageLimit";
+		SqlParameterSource param = new MapSqlParameterSource().addValue("pageLimit",pageLimit);
+		List<Employee> developmentList = template.query(sql, param, EMPLOYEE_ROW_MAPPER);
 		return developmentList;
 	}
 

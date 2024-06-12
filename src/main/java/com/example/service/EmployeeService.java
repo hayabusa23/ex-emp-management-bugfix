@@ -33,6 +33,11 @@ public class EmployeeService {
 		return employeeList;
 	}
 
+	public List<Employee> showTenEmployees(Integer pageLimit) {
+		List<Employee> employeeList = employeeRepository.findTenEmployees(pageLimit);
+		return employeeList;
+	}
+
 	public List<Employee> showSearchList(String searchName){
 		List<Employee> employeeList = employeeRepository.findByName(searchName);
 		return employeeList;

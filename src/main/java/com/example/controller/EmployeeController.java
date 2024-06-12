@@ -55,8 +55,13 @@ public class EmployeeController {
      * @return 従業員一覧画面
      */
     @GetMapping("/showList")
-    public String showList(Model model) {
-        List<Employee> employeeList = employeeService.showList();
+    public String showList(Model model, Integer pageLimit) {
+        if (pageLimit == null){
+            pageLimit = 0;
+        }
+        pageLimit = pageLimit + 10;
+        List<Employee> employeeList = employeeService.showTenEmployees(pageLimit);
+        model.addAttribute("pageLimit",pageLimit);
         model.addAttribute("employeeList", employeeList);
         return "employee/list";
     }
